@@ -1,22 +1,33 @@
 package com.conexion.petcarec.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
-@Setter
-@Getter
+@Table(name = "usuario")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idusuario;
-    private String contrasena;
-    private Long idpersona;
-    private Long idtipousuario;
-    private String estado;
+    @Column(name = "idusuario", nullable = false)
+    private Integer id;
 
-    }
+    @Column(name = "contrasena", nullable = false, length = 100)
+    private String contrasena;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idpersona", nullable = false)
+    private Persona idpersona;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idtipousuario", nullable = false)
+    private Tipodeusuario idtipousuario;
+
+
+    @Column(name = "estado", nullable = false)
+    private Character estado;
+
+}

@@ -1,25 +1,41 @@
 package com.conexion.petcarec.modelo;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-@Entity
-@Setter
 @Getter
+@Setter
+@Entity
+@Table(name = "persona")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idpersona;
+    @Column(name = "idpersona", nullable = false)
+    private Integer id;
+
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
-    private String persona;
-    private Date fechadenacimiento;
+
+    @Column(name = "apellido", nullable = false, length = 100)
+    private String apellido;
+
+    @Column(name = "fechadenacimiento")
+    private LocalDate fechadenacimiento;
+
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
-    private int telefono;
-    private String direccion;
+
+    @Column(name = "telefono", length = 20)
+    private String telefono;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "iddireccion")
+    private Direccion iddireccion;
+
+
 }
