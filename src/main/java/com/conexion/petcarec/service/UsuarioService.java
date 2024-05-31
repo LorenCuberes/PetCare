@@ -1,11 +1,11 @@
 package com.conexion.petcarec.service;
 
-import com.conexion.petcarec.modelo.Persona;
-import com.conexion.petcarec.modelo.Tipodeusuario;
-import com.conexion.petcarec.modelo.Usuario;
+import com.conexion.petcarec.modelo.*;
+import com.conexion.petcarec.repositorios.DireccionRepository;
 import com.conexion.petcarec.repositorios.PersonaRepository;
 import com.conexion.petcarec.repositorios.TipousuarioRepository;
 import com.conexion.petcarec.repositorios.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,11 +16,11 @@ public class UsuarioService {
     @Autowired
     private  UsuarioRepository usuarioRepository;
     @Autowired
-    private TipousuarioRepository tipousuarioRepository;
-
-
-    @Autowired
     private PersonaRepository personaRepository;
+    @Autowired
+    private TipousuarioRepository tipousuarioRepository;
+    @Autowired
+    private DireccionRepository direccionRepository;
 
     public  List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
@@ -35,13 +35,49 @@ public class UsuarioService {
         return false; // Autenticación fallida
     }
 
-    public String obtenerNombreApellido(String email) {
+    public UsuarioRespuesta usuarioRespuesta(String email, String contrasena) {
         Persona persona = personaRepository.findByEmail(email);
+        Usuario usuario1 = usuarioRepository.findBycontrasena(contrasena);
 
-        if (persona != null) {
-            return persona.getNombre() + " " + persona.getApellido()+ " " + persona.getEmail()+ " ";
+
+        if (persona != null && usuario1 != null) {
+            return new UsuarioRespuesta(
+                    persona.getNombre(),
+                    persona.getApellido(),
+                    persona.getEmail(),
+                    usuario1.getIdtipousuario().getDenominacion()
+            );
+
         }
         return null;
+    }
+    @Transactional
+    public Usuario registrarUsuario(RegistroUsuario registroUsuario) {
+        // Crear la entidad Persona
+        Persona persona = new Persona();
+        persona.setNombre(registroUsuario.getNombre());
+        persona.setApellido(registroUsuario.getApellido());
+        persona.setEmail(registroUsuario.getEmail());
+        persona.setTelefono(registroUsuario.getTelefono());
+        persona.setFechadenacimiento(registroUsuario.getFechaDeNacimiento());
+        persona.setIddireccion(null);
+
+        // Guardar la entidad Persona
+        persona = personaRepository.save(persona);
+
+        // Obtener el tipo de usuario
+        Tipodeusuario tipodeusuario = tipousuarioRepository.findById(registroUsuario.getIdTipoUsuario())
+                .orElseThrow(() -> new IllegalArgumentException("Tipo de usuario no válido"));
+
+        // Crear la entidad Usuario
+        Usuario usuario = new Usuario();
+        usuario.setContrasena(registroUsuario.getContrasena());
+        usuario.setIdpersona(persona);
+        usuario.setIdtipousuario(tipodeusuario);
+        usuario.setEstado('A'); // Asumimos que el estado inicial es 'A' (Activo)
+
+        // Guardar la entidad Usuario
+        return usuarioRepository.save(usuario);
     }
 
 }

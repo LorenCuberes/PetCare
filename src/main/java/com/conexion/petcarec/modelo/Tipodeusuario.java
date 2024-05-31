@@ -1,10 +1,7 @@
 package com.conexion.petcarec.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +13,7 @@ import lombok.Setter;
 public class Tipodeusuario {
     @Id
     @Column(name = "idtipousuario", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "denominacion", nullable = false, length = 100)

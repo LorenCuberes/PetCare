@@ -3,7 +3,8 @@ package com.conexion.petcarec.modelo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -13,6 +14,7 @@ import lombok.*;
 public class Usuario {
     @Id
     @Column(name = "idusuario", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "contrasena", nullable = false, length = 100)

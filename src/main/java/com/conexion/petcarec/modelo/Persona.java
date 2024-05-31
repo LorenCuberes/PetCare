@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class Persona {
     @Id
     @Column(name = "idpersona", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 100)
