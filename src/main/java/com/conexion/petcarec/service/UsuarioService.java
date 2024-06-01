@@ -26,10 +26,9 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
     public boolean autenticarUsuario(String email, String contrasena) {
-        Usuario usuario = usuarioRepository.findByidpersona_email(email);
-
-        if (usuario != null && usuario.getContrasena().equals(contrasena)) {
-
+        Usuario usuario = usuarioRepository.findByidpersona_Email(email);
+        System.out.println(email);
+        if ( usuario!= null && usuario.getContrasena().equals(contrasena)) {
             return true; // Autenticación exitosa
         }
         return false; // Autenticación fallida
@@ -40,11 +39,12 @@ public class UsuarioService {
         Usuario usuario1 = usuarioRepository.findBycontrasena(contrasena);
 
 
+
         if (persona != null && usuario1 != null) {
             return new UsuarioRespuesta(
+                    persona.getEmail(),
                     persona.getNombre(),
                     persona.getApellido(),
-                    persona.getEmail(),
                     usuario1.getIdtipousuario().getDenominacion()
             );
 

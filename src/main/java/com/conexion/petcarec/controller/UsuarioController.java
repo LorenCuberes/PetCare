@@ -1,13 +1,13 @@
 package com.conexion.petcarec.controller;
 
 import com.conexion.petcarec.modelo.Login;
-import com.conexion.petcarec.modelo.Registrar;
 import com.conexion.petcarec.modelo.RegistroUsuario;
 import com.conexion.petcarec.modelo.Usuario;
 import com.conexion.petcarec.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +47,10 @@ public class UsuarioController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        return ResponseEntity.badRequest().body("Error de formato JSON: " + ex.getMessage());
     }
 
 
