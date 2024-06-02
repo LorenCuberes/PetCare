@@ -22,7 +22,7 @@ public class UsuarioController {
 
 
     @GetMapping("/usuarios")
-    private ResponseEntity<List<Usuario>> getAllClients() {
+    private ResponseEntity<List<Usuario>> getAllUsuarios() {
         return ResponseEntity.ok(usuarioService.getAllUsuarios());
     }
     @PostMapping("/ingresar")
@@ -36,7 +36,7 @@ public class UsuarioController {
             // Obtener el nombre y apellido del usuario
             return ResponseEntity.ok(usuarioService.usuarioRespuesta(email,contrasena));
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
     @PostMapping("/registrar")
