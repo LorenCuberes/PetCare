@@ -1,7 +1,6 @@
 package com.conexion.petcarec.service;
 
 import com.conexion.petcarec.modelo.*;
-import com.conexion.petcarec.repositorios.DireccionRepository;
 import com.conexion.petcarec.repositorios.PersonaRepository;
 import com.conexion.petcarec.repositorios.TipousuarioRepository;
 import com.conexion.petcarec.repositorios.UsuarioRepository;

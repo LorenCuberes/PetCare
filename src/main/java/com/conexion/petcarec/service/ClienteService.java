@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClienteService {
 
@@ -16,7 +18,19 @@ public class ClienteService {
     private PersonaRepository personaRepository;
     @Autowired
     private DireccionRepository direccionRepository;
+    @Autowired
+    private PaisRepository paisRepository;
+    @Autowired
+    private ProvinciaRepository provinciaRepository;
 
+
+
+    public List<Pais> getAllPais() {
+        return paisRepository.findAll();
+    }
+    public List<Provincia> getAllProvincia() {
+        return provinciaRepository.findAll();
+    }
     @Transactional
     public Cliente registrarCliente(RegistroCliente registroCliente) {
         // Crear la entidad Persona
@@ -42,5 +56,6 @@ public class ClienteService {
         // Guardar la entidad Usuario
         return clienteRepository.save(cliente);
     }
+
 
 }
