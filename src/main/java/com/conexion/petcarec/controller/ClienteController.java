@@ -19,11 +19,18 @@ public class ClienteController {
 
     @PostMapping("/registrar")
     public ResponseEntity<?> registrar(@RequestBody RegistroCliente registroCliente) {
-        try {
-            clienteService.registrarCliente(registroCliente);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Cliente registrado con éxito");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        String email = registroCliente.getEmail();
+        boolean verificado= clienteService.VerificarCliente(email);
+        if (verificado) {
+            try {
+                clienteService.registrarCliente(registroCliente);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Cliente registrado con éxito");
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este email ya existe");
         }
     }
     @GetMapping("/pais")

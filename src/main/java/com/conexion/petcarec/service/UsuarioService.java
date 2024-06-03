@@ -50,7 +50,6 @@ public class UsuarioService {
     @Transactional
     public Usuario registrarUsuario(RegistroUsuario registroUsuario) {
         // Crear la entidad Persona
-        System.out.println(registroUsuario);
         Persona persona = new Persona();
         persona.setNombre(registroUsuario.getNombre());
         persona.setApellido(registroUsuario.getApellido());

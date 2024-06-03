@@ -77,6 +77,13 @@ public class ClienteService {
         // Guardar la entidad Usuario
         return clienteRepository.save(cliente);
     }
+    public boolean VerificarCliente(String email) {
+        Cliente cliente = clienteRepository.findByidpersona_Email(email);
+        if ( cliente == null) {
+            return true; // Autenticación exitosa
+        }
+        return false; // Autenticación fallida
+    }
 
 
 }
