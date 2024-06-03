@@ -16,5 +16,11 @@ public class RegistroCliente {
     private String email;
     private String telefono;
     private LocalDate fechaDeNacimiento;
-    //falta direccion
+    private String calle;
+    private String departamento;
+    private Integer numCalle;
+    private String barrio;
+    private Integer piso;
+    private Integer idProvincia;
+    private String descripcionLocalidad;
 }

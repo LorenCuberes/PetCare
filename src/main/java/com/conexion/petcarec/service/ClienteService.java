@@ -22,6 +22,8 @@ public class ClienteService {
     private PaisRepository paisRepository;
     @Autowired
     private ProvinciaRepository provinciaRepository;
+    @Autowired
+    private LocalidadRepository localidadRepository;
 
 
 
@@ -33,6 +35,26 @@ public class ClienteService {
     }
     @Transactional
     public Cliente registrarCliente(RegistroCliente registroCliente) {
+
+
+        Provincia provincia = provinciaRepository.findById(registroCliente.getIdProvincia())
+                .orElseThrow(() -> new IllegalArgumentException("Tipo de Provincia no válido"));
+
+        Localidad localidad = new Localidad();
+        localidad.setDescripcion(registroCliente.getDescripcionLocalidad());
+        localidad.setIdprovincia(provincia);
+        localidad = localidadRepository.save(localidad);
+
+
+        Direccion direccion = new Direccion();
+        direccion.setBarrio(registroCliente.getBarrio());
+        direccion.setCalle(registroCliente.getCalle());
+        direccion.setNumero(registroCliente.getNumCalle());
+        direccion.setPiso(registroCliente.getPiso());
+        direccion.setDepartamento(registroCliente.getDepartamento());
+        direccion.setIdlocalidad(localidad);
+        direccionRepository.save(direccion);
+
         // Crear la entidad Persona
         Persona persona = new Persona();
         persona.setNombre(registroCliente.getNombre());
@@ -40,8 +62,7 @@ public class ClienteService {
         persona.setEmail(registroCliente.getEmail());
         persona.setTelefono(registroCliente.getTelefono());
         persona.setFechadenacimiento(registroCliente.getFechaDeNacimiento());
-        //pendiente registrar direccion
-        //persona.setIddireccion(registroCliente);
+        persona.setIddireccion(direccion);
 
         // Guardar la entidad Persona
         persona = personaRepository.save(persona);

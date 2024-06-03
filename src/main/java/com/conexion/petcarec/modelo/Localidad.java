@@ -13,6 +13,7 @@ import lombok.Setter;
 public class Localidad {
     @Id
     @Column(name = "idlocalidad", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "descripcion", nullable = false, length = 100)

@@ -13,6 +13,7 @@ import lombok.Setter;
 public class Direccion {
     @Id
     @Column(name = "iddireccion", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "calle", nullable = false, length = 100)
