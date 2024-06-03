@@ -19,15 +19,12 @@ public class UsuarioService {
     private PersonaRepository personaRepository;
     @Autowired
     private TipousuarioRepository tipousuarioRepository;
-    @Autowired
-    private DireccionRepository direccionRepository;
 
     public  List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
     }
     public boolean autenticarUsuario(String email, String contrasena) {
         Usuario usuario = usuarioRepository.findByidpersona_Email(email);
-        System.out.println(email);
         if ( usuario!= null && usuario.getContrasena().equals(contrasena)) {
             return true; // Autenticación exitosa
         }
@@ -54,13 +51,13 @@ public class UsuarioService {
     @Transactional
     public Usuario registrarUsuario(RegistroUsuario registroUsuario) {
         // Crear la entidad Persona
+        System.out.println(registroUsuario);
         Persona persona = new Persona();
         persona.setNombre(registroUsuario.getNombre());
         persona.setApellido(registroUsuario.getApellido());
         persona.setEmail(registroUsuario.getEmail());
         persona.setTelefono(registroUsuario.getTelefono());
         persona.setFechadenacimiento(registroUsuario.getFechaDeNacimiento());
-        persona.setIddireccion(null);
 
         // Guardar la entidad Persona
         persona = personaRepository.save(persona);
@@ -78,6 +75,13 @@ public class UsuarioService {
 
         // Guardar la entidad Usuario
         return usuarioRepository.save(usuario);
+    }
+    public boolean VerificarUsuario(String email) {
+        Usuario usuario = usuarioRepository.findByidpersona_Email(email);
+        if ( usuario == null) {
+            return true; // Autenticación exitosa
+        }
+        return false; // Autenticación fallida
     }
 
 }

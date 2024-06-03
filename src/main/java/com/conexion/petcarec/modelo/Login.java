@@ -8,7 +8,7 @@ import lombok.Setter;
 public class Login {
 
     private String email;
-    private String password;
+    private String contrasena;
 
     // Getters y setters
 }

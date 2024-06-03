@@ -28,12 +28,13 @@ public class UsuarioController {
     @PostMapping("/ingresar")
     public ResponseEntity<?> login(@RequestBody Login login) {
         String email = login.getEmail();
-        String contrasena = login.getPassword();
+        String contrasena = login.getContrasena();
 
         // Validar la autenticación
         boolean autenticado = usuarioService.autenticarUsuario(email, contrasena);
         if (autenticado) {
             // Obtener el nombre y apellido del usuario
+
             return ResponseEntity.ok(usuarioService.usuarioRespuesta(email,contrasena));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -41,11 +42,19 @@ public class UsuarioController {
     }
     @PostMapping("/registrar")
     public ResponseEntity<?> registrar(@RequestBody RegistroUsuario registroUsuario) {
-        try {
-            Usuario usuario = usuarioService.registrarUsuario(registroUsuario);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado con éxito");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        String email = registroUsuario.getEmail();
+        boolean verificado= usuarioService.VerificarUsuario(email);
+        if (verificado) {
+            try {
+                usuarioService.registrarUsuario(registroUsuario);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado con éxito");
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
+        }
+
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este email ya existe");
         }
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)

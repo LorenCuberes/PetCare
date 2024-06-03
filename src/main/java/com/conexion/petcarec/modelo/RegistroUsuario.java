@@ -1,13 +1,11 @@
 package com.conexion.petcarec.modelo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 @Data
 public class RegistroUsuario {
     private String nombre;
