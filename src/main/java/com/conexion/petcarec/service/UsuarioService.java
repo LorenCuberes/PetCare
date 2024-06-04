@@ -22,6 +22,10 @@ public class UsuarioService {
     public  List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
     }
+    public  Usuario getUsuarioById(Usuario usuario) {
+        Integer idusuario = usuario.getId();
+        return usuarioRepository.findById(idusuario).orElseThrow(() -> new IllegalArgumentException("Tipo de usuario no válido"));
+    }
     public boolean autenticarUsuario(String email, String contrasena) {
         Usuario usuario = usuarioRepository.findByidpersona_Email(email);
         if ( usuario!= null && usuario.getContrasena().equals(contrasena)) {

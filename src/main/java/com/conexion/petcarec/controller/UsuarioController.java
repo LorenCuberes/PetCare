@@ -25,6 +25,10 @@ public class UsuarioController {
     private ResponseEntity<List<Usuario>> getAllUsuarios() {
         return ResponseEntity.ok(usuarioService.getAllUsuarios());
     }
+    @PostMapping("/idusuarios")
+    private ResponseEntity<Usuario> getByidUsuarios(@RequestBody Usuario usuario ) {
+        return ResponseEntity.ok(usuarioService.getUsuarioById(usuario));
+    }
     @PostMapping("/ingresar")
     public ResponseEntity<?> login(@RequestBody Login login) {
         String email = login.getEmail();
