@@ -56,7 +56,7 @@ public class MascotaService {
         */
 
         Cliente cliente = clienteRepository.findById(1)
-                .orElseThrow(() -> new IllegalArgumentException("Raza no válida"));
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no válido"));
         //despues se puede tomar el cliente a cargo de la mascota tambien, le asigno el cliente 1 por ahora
 
         // Crear la entidad mascota
