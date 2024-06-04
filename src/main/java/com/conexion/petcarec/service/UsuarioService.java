@@ -85,5 +85,24 @@ public class UsuarioService {
         }
         return false; // Autenticación fallida
     }
+    public Boolean Modificar(RegistroUsuario registroUsuario) {
 
+        Usuario usuario = usuarioRepository.findByidpersona_Email(registroUsuario.getEmail());
+        if (usuario != null) {
+            Persona persona = usuario.getIdpersona();
+            usuarioRepository.delete(usuario);
+            personaRepository.delete(persona);
+            registrarUsuario(registroUsuario);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public void deleteUsuario(Integer id) {
+        Usuario usuario = usuarioRepository.findById(id).get();
+        Persona persona = usuario.getIdpersona();
+        usuarioRepository.deleteById(id);
+        personaRepository.delete(persona);
+    }
 }

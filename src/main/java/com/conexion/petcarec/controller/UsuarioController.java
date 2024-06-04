@@ -61,6 +61,30 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este email ya existe");
         }
     }
+    @PostMapping("/modificar")
+    public ResponseEntity<?> Modificar(@RequestBody RegistroUsuario registroUsuario) {
+        boolean modi = usuarioService.Modificar(registroUsuario);
+        if (modi){
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuario modificado con éxito");}
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este Usuario no existe");
+        }
+    }
+    @PostMapping("/delete")
+    private ResponseEntity<String> deleteUsuario(@RequestBody Usuario usuario ) {
+        if (usuario.getId()!= null) {
+            Integer id = usuario.getId();
+            try {
+                usuarioService.deleteUsuario(id);
+                return ResponseEntity.ok("Usuario y persona eliminados correctamente.");
+            } catch (Exception e) {
+                return ResponseEntity.status(500).body("Error al eliminar el usuario y persona: " + e.getMessage());
+            }
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El id es nulo");
+        }
+    }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest().body("Error de formato JSON: " + ex.getMessage());
