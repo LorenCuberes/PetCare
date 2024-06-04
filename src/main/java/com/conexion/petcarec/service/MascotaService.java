@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class MascotaService {
@@ -55,7 +56,7 @@ public class MascotaService {
         cuidado = CuidadoRepository.save(cuidado);
         */
 
-        Cliente cliente = clienteRepository.findById(1)
+        Cliente cliente = clienteRepository.findById(registroMascota.getIdcliente())
                 .orElseThrow(() -> new IllegalArgumentException("Cliente no válido"));
         //despues se puede tomar el cliente a cargo de la mascota tambien, le asigno el cliente 1 por ahora
 
@@ -68,6 +69,7 @@ public class MascotaService {
         mascota.setIdraza(raza);
         mascota.setIdanimal(animal);
         mascota.setIdcliente(cliente);
+        mascota.setSexo(registroMascota.getSexo());
         //mascota.setIdcliente(registroMascota.getIdcliente());
         //mascota.setIdcuidado(cuidado);
         //mascota.setIdficha(ficha);
@@ -77,6 +79,12 @@ public class MascotaService {
 
         // Guardar la entidad mascota
         return mascotaRepository.save(mascota);
+    }
+    public List<Animal> getAllAnimal() {
+        return animalRepository.findAll();
+    }
+    public List<Raza> getAllRaza() {
+        return razaRepository.findAll();
     }
 
 }

@@ -15,6 +15,7 @@ public class RegistroMascota {
     private LocalDate fechaDeNacimiento;
     private Double peso;
     private String tamano;
+    private String sexo;
     private Integer idraza;
     private Integer idanimal;
     private Integer idcuidado;

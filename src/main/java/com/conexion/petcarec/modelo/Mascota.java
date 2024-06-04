@@ -29,6 +29,9 @@ public class Mascota {
     @Column(name = "tamano", length = 50)
     private String tamano;
 
+    @Column(name = "sexo", length = 50)
+    private String sexo;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idanimal", nullable = false)
     private Animal idanimal;

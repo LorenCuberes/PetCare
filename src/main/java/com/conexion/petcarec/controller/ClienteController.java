@@ -41,5 +41,8 @@ public class ClienteController {
     private ResponseEntity<List<Provincia>> getAllProvincia() {
         return ResponseEntity.ok(clienteService.getAllProvincia());
     }
-
+    @GetMapping("/list")
+    private ResponseEntity<List<Cliente>> getAllClientes() {
+        return ResponseEntity.ok(clienteService.getAllClientes());
+    }
 }

@@ -84,6 +84,9 @@ public class ClienteService {
         }
         return false; // Autenticación fallida
     }
+    public List<Cliente> getAllClientes() {
+        return clienteRepository.findAll();
+    }
 
 
 }
