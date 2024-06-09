@@ -24,6 +24,9 @@ public class Producto {
     @Column(name = "stock")
     private Integer stock;
 
+    @Column(name = "codigoproducto", nullable = false, length = 100)
+    private String codigoproducto;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idcategoria", nullable = false)
     private Categoriaproducto idcategoria;
