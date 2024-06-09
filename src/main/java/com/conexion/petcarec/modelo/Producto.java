@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "producto")
 public class Producto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idproducto", nullable = false)
     private Integer id;
 
@@ -21,7 +22,7 @@ public class Producto {
     @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
-    @Column(name = "stock")
+    @Column(name = "stock", nullable = false)
     private Integer stock;
 
     @Column(name = "codigoproducto", nullable = false, length = 100)

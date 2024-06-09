@@ -1,11 +1,8 @@
 package com.conexion.petcarec.controller;
 
 
-import com.conexion.petcarec.modelo.Animal;
-import com.conexion.petcarec.modelo.Producto;
-import com.conexion.petcarec.modelo.Raza;
+import com.conexion.petcarec.modelo.*;
 
-import com.conexion.petcarec.modelo.RegistroProducto;
 import com.conexion.petcarec.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,5 +31,11 @@ public class ProductoController {
     private ResponseEntity<List<Producto>> getAllProducto() {
         return ResponseEntity.ok(productoService.getAllProducto());
     }
+
+    @GetMapping("/categorias")
+    private ResponseEntity<List<Categoriaproducto>> getAllCategoriaproducto() {
+        return ResponseEntity.ok(productoService.getAllCategoriaproducto());
+    }
+
 
 }

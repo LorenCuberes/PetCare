@@ -16,14 +16,7 @@ public class ProductoService {
     private ProductoRepository productoRepository;
     @Autowired
     private CategoriaRepository categoriaRepository;
-    @Autowired
-    private RazaRepository razaRepository;
-    @Autowired
-    private CuidadoRepository cuidadoRepository;
-    @Autowired
-    private FichaRepository fichaRepository;
-    @Autowired
-    private ClienteRepository clienteRepository;
+
 
     @Transactional
     public Producto registrarProducto(RegistroProducto registroProducto) {
@@ -47,7 +40,7 @@ public class ProductoService {
         return productoRepository.save(producto);
 
     }
-    public List<Categoriaproducto> getAllCategoria() {
+    public List<Categoriaproducto> getAllCategoriaproducto() {
         return categoriaRepository.findAll();
     }
     public  List<Producto> getAllProducto() {
