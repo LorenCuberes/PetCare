@@ -43,6 +43,14 @@ public class ProductoService {
     public List<Categoriaproducto> getAllCategoriaproducto() {
         return categoriaRepository.findAll();
     }
+    public boolean VerificarProducto(String codigoproducto) {
+        Producto producto = productoRepository.findBycodigoproducto(codigoproducto);
+        if ( producto == null) {
+            return true; // Autenticación exitosa
+        }
+        return false; // Autenticación fallida
+    }
+
     public  List<Producto> getAllProducto() {
         return productoRepository.findAll();
     }

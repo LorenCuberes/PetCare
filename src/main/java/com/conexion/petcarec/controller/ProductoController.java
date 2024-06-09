@@ -20,11 +20,19 @@ public class ProductoController {
 
     @PostMapping("/registrar")
     public ResponseEntity<?> registrar(@RequestBody RegistroProducto registroProducto) {
-        try {
-            productoService.registrarProducto(registroProducto);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Producto registrado con éxito");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+        String codigoproducto = registroProducto.getCodigoproducto();
+        boolean verificado= productoService.VerificarProducto(codigoproducto);
+        if (verificado) {
+            try {
+                productoService.registrarProducto(registroProducto);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Producto registrado con éxito");
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este código de producto ya existe");
         }
     }
     @GetMapping("/listaProductos")
