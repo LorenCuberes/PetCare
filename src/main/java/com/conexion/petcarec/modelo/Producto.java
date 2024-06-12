@@ -28,7 +28,7 @@ public class Producto {
     @Column(name = "codigoproducto", nullable = false, length = 100)
     private String codigoproducto;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+   @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idcategoria", nullable = false)
     private Categoriaproducto idcategoria;
 

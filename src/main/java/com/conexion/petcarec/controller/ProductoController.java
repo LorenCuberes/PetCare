@@ -35,8 +35,9 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este código de producto ya existe");
         }
     }
-    @GetMapping("/listaProductos")
-    private ResponseEntity<List<Producto>> getAllProducto() {
+
+    @GetMapping("/listaproductos")
+    private ResponseEntity<List<Producto>>  getAllProducto() {
         return ResponseEntity.ok(productoService.getAllProducto());
     }
 
