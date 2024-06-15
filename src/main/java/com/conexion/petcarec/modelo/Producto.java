@@ -32,4 +32,5 @@ public class Producto {
     @JoinColumn(name = "idcategoria", nullable = false)
     private Categoriaproducto idcategoria;
 
+
 }
