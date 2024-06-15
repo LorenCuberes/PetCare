@@ -18,6 +18,12 @@ public class Venta {
     @Column(name = "fechapedido", nullable = false)
     private LocalDate fechapedido;
 
+    @Column(name = "observaciones", nullable = false, length = 100)
+    private String observaciones;
+
+    @Column(name = "formadepago", nullable = false, length = 100)
+    private String formadepago;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idcliente", nullable = false)
     private Cliente idcliente;
