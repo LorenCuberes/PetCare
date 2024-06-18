@@ -12,7 +12,7 @@ public class RegistroVenta {
     private LocalDate fechapedido;
     private String observaciones;
     private String formadepago;
-    private Cliente idcliente;
-    private Estadopedido idestado;
+    private Integer idcliente;
+    private Integer idestado;
 
 }

@@ -20,4 +20,8 @@ public class Detalledeventa {
     @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idpedido", nullable = false)
+    private Venta idpedido;
+
 }
