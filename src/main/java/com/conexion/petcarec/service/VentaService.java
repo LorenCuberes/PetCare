@@ -48,7 +48,7 @@ public class VentaService {
     public List<Detalledeventa> getdetalleventaById(RegistroDetalleVenta detalledeventa) {
         Venta venta= ventaRepository.findById(detalledeventa.getIdpedido())
                 .orElseThrow(() -> new IllegalArgumentException("Categoría no válida"));
-        return detalledeventaRepository.findByIdPedido(venta.getId());
+        return detalledeventaRepository.findByidpedido(venta);
     }
     public  List<Venta> getAllVentas() {
         return ventaRepository.findAll();
