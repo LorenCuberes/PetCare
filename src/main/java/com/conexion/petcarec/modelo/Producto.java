@@ -1,5 +1,6 @@
 package com.conexion.petcarec.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "producto")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -28,8 +28,8 @@ public class PedidoCrontroller {
         return ResponseEntity.status(HttpStatus.CREATED).body("DetalledeVenta registrada con éxito");
     }
     @PostMapping("/idventasparadetalle")
-    private ResponseEntity <List<Detalledeventa>> getByidventa(@RequestBody RegistroDetalleVenta detalledeventa ) {
-        return ResponseEntity.ok(ventaService.getdetalleventaById(detalledeventa));
+    private ResponseEntity <List<Detalledeventa>> getByidventa(@RequestBody Pedido pedido_id ) {
+        return ResponseEntity.ok(ventaService.getdetalleventaById(pedido_id));
     }
     @GetMapping("/listaventas")
     private ResponseEntity<List<Venta>>  getAllVentas() {

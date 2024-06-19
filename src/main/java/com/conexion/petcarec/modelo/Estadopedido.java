@@ -1,5 +1,6 @@
 package com.conexion.petcarec.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "estadopedido")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Estadopedido {
     @Id
     @Column(name = "idestado", nullable = false)
