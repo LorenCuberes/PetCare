@@ -14,5 +14,5 @@ public class RegistroVenta {
     private String formadepago;
     private Integer idcliente;
     private Integer idestado;
-
+    private RegistroDetalleVenta [] detalleVenta;
 }

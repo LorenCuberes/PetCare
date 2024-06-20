@@ -19,7 +19,13 @@ public class PedidoCrontroller {
 
     @PostMapping("/registro")
     public ResponseEntity<?> registrarVenta(@RequestBody RegistroVenta registroVenta) {
-       registroVentaService.saveRegistroVenta(registroVenta);
+        Integer idpedido =registroVentaService.saveRegistroVenta(registroVenta);
+
+        for (int i = 0; i < registroVenta.getDetalleVenta().length ; i++) {
+            registroVenta.getDetalleVenta()[i].setIdpedido(idpedido);
+            registroVentaService.saveDetalledeventa(registroVenta.getDetalleVenta()[i]);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body("Venta registrada con éxito");
     }
     @PostMapping("/registrodetalle")

@@ -23,7 +23,7 @@ public class VentaService {
 
 
     @Transactional
-    public Venta saveRegistroVenta(RegistroVenta registroVenta) {
+    public Integer saveRegistroVenta(RegistroVenta registroVenta) {
         System.out.println(registroVenta);
         Cliente cliente = clienteRepository.findById(registroVenta.getIdcliente())
                 .orElseThrow(() -> new IllegalArgumentException("cliente no válido"));
@@ -36,7 +36,8 @@ public class VentaService {
         venta.setFechapedido(registroVenta.getFechapedido());
         venta.setObservaciones(registroVenta.getObservaciones());
         venta.setFormadepago(registroVenta.getFormadepago());
-        return ventaRepository.save(venta);
+        ventaRepository.save(venta);
+        return venta.getId();
     }
     public Detalledeventa saveDetalledeventa(RegistroDetalleVenta registrodetalledeventa) {
 
