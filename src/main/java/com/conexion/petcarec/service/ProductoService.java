@@ -55,4 +55,18 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    @Transactional
+    public Producto actualizarStock(Integer idproducto, int cantidad) {
+
+        //Producto producto = productoRepository.findByid(idproducto).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Producto producto = productoRepository.findById(idproducto)
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + idproducto));
+        // Actualizar el stock
+        producto.setStock(producto.getStock() - cantidad);
+
+        // Guardar los cambios en la base de datos
+        return productoRepository.save(producto);
+
+    }
+
 }

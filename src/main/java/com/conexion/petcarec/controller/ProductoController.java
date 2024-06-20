@@ -46,5 +46,10 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.getAllCategoriaproducto());
     }
 
+    @PostMapping("/actualizarstock")
+    public Producto actualizarStock(@RequestBody ActualizarStock actualizarStock) {
+        return productoService.actualizarStock(actualizarStock.getId(), actualizarStock.getCantidad());
+    }
+
 
 }
