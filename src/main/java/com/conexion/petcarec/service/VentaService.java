@@ -29,7 +29,7 @@ public class VentaService {
                 .orElseThrow(() -> new IllegalArgumentException("cliente no válido"));
         Estadopedido estadopedido = estadopedidoRepository.findById(registroVenta.getIdestado())
                 .orElseThrow(() -> new IllegalArgumentException("estado no válido"));
-        System.out.println(cliente);
+
         Venta venta = new Venta();
         venta.setIdcliente(cliente);
         venta.setIdestado(estadopedido);
