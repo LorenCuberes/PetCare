@@ -19,6 +19,8 @@ public class VentaService {
     private EstadopedidoRepository estadopedidoRepository;
     @Autowired
     private DetalledeventaRepository detalledeventaRepository;
+    @Autowired
+    private ProductoService productoService;
 
 
 
@@ -49,6 +51,9 @@ public class VentaService {
         detalledeventa.setCantidad(registrodetalledeventa.getCantidad());
         detalledeventa.setIdproducto(producto);
         detalledeventa.setIdpedido(venta);
+        // Actualizar el stock del producto llamando al método en ProductoService
+        productoService.actualizarStock(producto.getId(), detalledeventa.getCantidad());
+
         return detalledeventaRepository.save(detalledeventa);
     }
     public List<Detalledeventa> getdetalleventaById(Pedido detalledeventa) {
